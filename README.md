@@ -1,3 +1,4 @@
+[![Azure Static Web Apps CI/CD](https://github.com/cc2ground/workshop-test/actions/workflows/azure-static-web-apps-lemon-pebble-0bb22af00.yml/badge.svg)](https://github.com/cc2ground/workshop-test/actions/workflows/azure-static-web-apps-lemon-pebble-0bb22af00.yml)
 # GitHub 연동방법
 (1) 프로젝트 디렉토리 내 저장소 생성
 ```
