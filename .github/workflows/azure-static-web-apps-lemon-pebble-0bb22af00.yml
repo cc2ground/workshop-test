@@ -1,13 +1,18 @@
 name: Azure Static Web Apps CI/CD
 
 on:
-  push:
-    branches:
-      - main
+#   Maual Test용
+#   repository_dispatch:
+
+#   push:
+#     branches:
+#       - main
   pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
+    types: [opened]
+    paths:
+      -'board-app/**'
+      -'!board-app/**.md'
+    branches: [ main ]
 
 jobs:
   static-analyze:
@@ -82,7 +87,7 @@ jobs:
           echo 'Complete Unit Test'
 
   vuecli-build:
-    needs: unit-test
+    needs: [ static-analyze, unit-test ]
     runs-on: ubuntu-latest
     name: vue-cli-service build
     steps:
@@ -109,7 +114,7 @@ jobs:
     needs: vuecli-build
     environment:
       name: staging
-      url: 'https://staging2.demotest.com'
+      url: 'https://lemon-pebble-0bb22af00.1.azurestaticapps.net'
       
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
