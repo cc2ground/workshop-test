@@ -4,14 +4,14 @@ on:
 #   Maual Test용
 #   repository_dispatch:
 
-#   push:
-#     branches:
-#       - main
+  push:
+    branches:
+      - main
   pull_request:
-    types: [opened]
+    types: [opened, reopened]
     paths:
-      -'board-app/**'
-      -'!board-app/**.md'
+      - 'board-app/**'
+      - '!board-app/**.md'
     branches: [ main ]
 
 jobs:
@@ -33,6 +33,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      with:
+        ref: 'dev'
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -70,6 +72,8 @@ jobs:
       # checkout the repo
       - name: 'Checkout GitHub Action' 
         uses: actions/checkout@main
+        with:
+          ref: 'dev'        
 
       # 지정한 버전 node.js 설치
       - name: Setup Node ${{ env.NODE_VERSION }}
@@ -94,6 +98,8 @@ jobs:
       # checkout the repo
       - name: 'Checkout GitHub Action' 
         uses: actions/checkout@main
+        with:
+          ref: 'dev'
 
       # 지정한 버전 node.js 설치
       - name: Setup Node ${{ env.NODE_VERSION }}
@@ -116,13 +122,13 @@ jobs:
       name: staging
       url: 'https://lemon-pebble-0bb22af00.1.azurestaticapps.net'
       
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: true
+          ref: 'dev'
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -135,6 +141,8 @@ jobs:
           app_location: "/board-app" # App source code path
           api_location: "" # Api source code path - optional
           output_location: "dist" # Built app content directory - optional
+          skip_app_build: 'false'
+          app_build_command: 'npm run build'
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
