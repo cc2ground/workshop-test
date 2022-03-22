@@ -28,7 +28,7 @@ jobs:
           echo 'Start Unit Test'
 
           cd board-api
-          npm ci
+          npm install
           npm run test
 
           echo 'Complete Unit Test'
