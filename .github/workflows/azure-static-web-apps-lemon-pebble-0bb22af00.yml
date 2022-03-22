@@ -10,8 +10,8 @@ on:
   pull_request:
     types: [opened]
     paths:
-      -'board-app/**'
-      -'!board-app/**.md'
+      - 'board-app/**'
+      - '!board-app/**.md'
     branches: [ main ]
 
 jobs:
