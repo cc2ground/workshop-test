@@ -3,7 +3,7 @@
 		<v-container>
 			<v-card class="mx-auto" max-width="500" tile>
 				<v-card-title>
-					Welcom to Cloocus Workshop
+					Welcome to Cloocus Workshop!
 				</v-card-title>
 				<v-card-text>
 					<h2>Introduction</h2>
