@@ -3,7 +3,7 @@
 		<v-container>
 			<v-card class="mx-auto" max-width="500" tile>
 				<v-card-title>
-					Vue, Spring Boot Board
+					Vue, Spring Boot Board (test01)
 				</v-card-title>
 				<v-card-text>
 					<h2>Introduction</h2>
