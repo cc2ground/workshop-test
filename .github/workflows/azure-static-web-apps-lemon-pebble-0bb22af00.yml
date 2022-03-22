@@ -33,8 +33,32 @@ jobs:
 
           echo 'Complete Unit Test'
 
+  vuecli-build:
+    needs: unit-test
+    runs-on: ubuntu-latest
+    name: vue-cli-service build
+    steps:
+      # checkout the repo
+      - name: 'Checkout GitHub Action' 
+        uses: actions/checkout@main
+
+      # 지정한 버전 node.js 설치
+      - name: Setup Node ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - run: |
+          echo 'Start build Test'
+
+          cd board-app
+          npm install
+          npm run build
+
+          echo 'Complete build Test'
     
   build_and_deploy_job:
+    needs: vuecli-build
     environment:
       name: staging
       url: 'https://staging2.demotest.com'
