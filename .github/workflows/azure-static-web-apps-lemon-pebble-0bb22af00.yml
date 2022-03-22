@@ -10,7 +10,35 @@ on:
       - main
 
 jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    name: Unit Test using jest
+    steps:
+      # checkout the repo
+      - name: 'Checkout GitHub Action' 
+        uses: actions/checkout@main
+
+      # 지정한 버전 node.js 설치
+      - name: Setup Node ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - run: |
+          echo 'Start Unit Test'
+
+          cd board-api
+          npm ci
+          npm run test
+
+          echo 'Complete Unit Test'
+
+    
   build_and_deploy_job:
+    environment:
+      name: staging
+      url: 'https://staging2.demotest.com'
+      
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
