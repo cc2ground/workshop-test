@@ -122,7 +122,6 @@ jobs:
       name: staging
       url: 'https://lemon-pebble-0bb22af00.1.azurestaticapps.net'
       
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
